@@ -7,7 +7,7 @@
             style="position: fixed; inset: 0; width: 100%; height: 100%; display: block; overflow: hidden; background: transparent;"
             renderer="alpha: true; antialias: true; precision: medium; logarithmicDepthBuffer: true;" :arjs="arJsConfig"
             device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false" @loaded="onSceneLoaded">
-            <a-nft ref="nftEl" type="nft" :url="markerArUrl" smooth="true" smoothCount="5" 
+            <a-nft ref="nftEl" type="nft" :url="markerArUrl" smooth="true" smoothCount="5"
                 smoothTolerance="0.01" smoothThreshold="2">
                 <!-- Aumentado a escala para visibilidade em NFT -->
                 <a-entity :gltf-model="`url(${treeModelUrl})`" scale="100 100 100" position="0 0 0" rotation="-90 0 0"></a-entity>
@@ -39,7 +39,6 @@ const resolverBasePublica = () => {
 const montarUrlPublica = (caminhoRelativo) => {
     const base = resolverBasePublica();
     const caminho = caminhoRelativo.replace(/^\/+/, '');
-    // Usar a URL completa ajuda o AR.js a localizar os arquivos NFT em subpastas complexas
     return `${window.location.origin}${base}${caminho}`;
 };
 
@@ -66,7 +65,6 @@ const encerrarAR = () => {
         arIniciado.value = false;
         arPronto.value = false;
 
-        // Para qualquer stream ainda ligado pelos elementos de video.
         const videos = document.querySelectorAll('video');
         videos.forEach((video) => {
             try {
@@ -81,7 +79,6 @@ const encerrarAR = () => {
             }
         });
 
-        // Remove elementos injetados pelo AR.js para evitar persistencia visual.
         const seletoresAR = [
             'video.arjs-video',
             '#arjs-video',
@@ -102,7 +99,6 @@ const encerrarAR = () => {
             }
         });
 
-        // Restaura classes globais caso A-Frame/AR.js as tenha alterado.
         document.documentElement.classList.remove('ar-mode');
         document.body.classList.remove('ar-mode');
         document.getElementById('app')?.classList.remove('ar-mode');
@@ -147,7 +143,6 @@ const aplicarLayoutTelaCheia = () => {
         });
     });
 
-    // AR.js pode sobrescrever z-index em runtime; reforcamos hierarquia.
     document.querySelectorAll('video, #arjs-video, .arjs-video').forEach((el) => {
         el.style.setProperty('z-index', '10001', 'important');
     });
@@ -228,7 +223,6 @@ const validarArquivosAR = async () => {
 
 const onResize = () => {
     aplicarLayoutTelaCheia();
-    // Evita flood no console durante resize contínuo.
     if (resizeLogTimer) clearTimeout(resizeLogTimer);
     resizeLogTimer = setTimeout(() => logArLayout('resize'), 120);
 };
@@ -254,7 +248,6 @@ const registrarEventosMarker = () => {
     el.addEventListener('markerFound', nftMarkerFoundHandler);
     el.addEventListener('markerLost', nftMarkerLostHandler);
 
-    // Eventos especificos do AR.js NFT
     el.addEventListener('arjs-nft-loaded', (ev) => {
         console.log('[AR DEBUG] NFT Data Loaded:', ev.detail);
     });
@@ -310,7 +303,6 @@ const iniciarAR = async () => {
 const voltarParaLanding = () => {
     console.log('[AR DEBUG] Botão voltar clicado');
     encerrarAR();
-    // Forçamos a limpeza do DOM antes da transição de rota
     setTimeout(() => {
         router.replace({ name: 'landing' });
     }, 50);

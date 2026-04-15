@@ -10,7 +10,7 @@ const routes = [
     },
     {
         path: '/ar',
-        name: 'ar', //referencia a rota para uma nova "página", que é o ARView.vue
+        name: 'ar',
         component: ARView
     },
 ]
