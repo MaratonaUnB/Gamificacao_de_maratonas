@@ -5,7 +5,7 @@
       <h3 class="hero-sub">Em breve, a Arena será seu refúgio nas maratonas de programação. Enquanto isso, escaneei seu bottom e veja a mágica acontecer!</h3>
       <div class="ar-button">
         <button @click="irParaAR" class="btn-pixel btn-ar">
-          Escanear Botton
+          Escanear Bottom
         </button>
       </div>
     </div>
