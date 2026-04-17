@@ -42,7 +42,7 @@ const montarUrlPublica = (caminhoRelativo) => {
     return `${window.location.origin}${base}${caminho}`;
 };
 
-const markerArUrl = montarUrlPublica('image/botonCerrado');
+const markerArUrl = montarUrlPublica('image/trex');
 const treeModelUrl = montarUrlPublica('image/Disco3d-1.glb');
 let htmlClasseAnterior = '';
 let bodyClasseAnterior = '';
